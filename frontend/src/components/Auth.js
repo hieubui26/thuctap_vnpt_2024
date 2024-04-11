@@ -19,3 +19,4 @@ export function RequireToken({ children }) {
 
   return children;
 }
+export default RequireToken;
