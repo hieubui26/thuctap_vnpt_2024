@@ -28,7 +28,7 @@ function Signup() {
       name: name,
       password: password,
     }).then((response) => {
-      console.log(response);
+      // console.log(response);
       if (response.data.message) {
         setRegisterStatus(response.data.message);
       } else {
