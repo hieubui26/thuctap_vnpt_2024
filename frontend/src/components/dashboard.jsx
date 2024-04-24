@@ -3,6 +3,7 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 
 function Dashboard() {
   const navigate = useNavigate();
+
   const signOut = () => {
     localStorage.removeItem("Token");
     navigate("/login");
@@ -51,7 +52,7 @@ function Dashboard() {
                   <span className="ms-1 d-none d-sm-inline">Profile</span>
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <button
                   type="button"
                   className="btn btn-success"
@@ -59,13 +60,15 @@ function Dashboard() {
                 >
                   Sign Out
                 </button>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>
         <div className="col p-0 m-0">
-          <div className="p-2 d-flex justify-content-center shadow">
-            <h4>Management System</h4>
+          <div className="p-2 d-flex justify-content-end align-items-center shadow">
+            <button type="button" className="btn btn-success" onClick={signOut}>
+              Sign Out
+            </button>
           </div>
           <Outlet />
         </div>

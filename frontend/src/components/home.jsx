@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-const { jwtDecode } = require("jwt-decode");
+
+import jwtDecode from "jwt-decode";
+// const jwtDecode = require("jwt-decode");
 
 function Home() {
   const [userRole, setUserRole] = useState("");
@@ -10,7 +12,7 @@ function Home() {
       const decoded = jwtDecode(token);
       const { role } = decoded;
 
-      console.log(role);
+      // console.log(role);
       setUserRole(role);
     }
   }, []);

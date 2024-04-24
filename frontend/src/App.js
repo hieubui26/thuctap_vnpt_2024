@@ -4,7 +4,7 @@ import Login from "./components/login";
 import Signup from "./components/signup";
 import Dashboard from "./components/dashboard";
 import Home from "./components/home";
-import { RequireToken } from "./components/Auth.js";
+import { RequireToken } from "./components/Auth.jsx";
 
 function App() {
   return (

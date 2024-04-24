@@ -1,22 +1,21 @@
 import React, { useState } from "react";
-import loginimg from "./login.png";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { setToken } from "./Auth.js";
+import Axios from "axios";
 
-function Login() {
+function Signup() {
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [registerStatus, setRegisterStatus] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate();
 
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
   };
-  const login = (e) => {
+
+  const register = (e) => {
     e.preventDefault();
-    if (!email || !password) {
+    if (!email || !name || !password) {
       setError("Please fill in all fields");
       return;
     }
@@ -24,56 +23,68 @@ function Login() {
       setError("Please enter a valid email address");
       return;
     }
-    axios
-      .post("http://localhost:3001/login", {
-        email: email,
-        password: password,
-      })
-      .then((res) => {
-        // console.log(res);
-        if (res.data.Status === "Success") {
-          // console.log(res.data);
-          setToken(res.data.AccessToken);
-          navigate("/");
-        } else {
-          setError(res.data.Error);
-        }
-      })
-      .catch((err) => console.log(err));
+    Axios.post("http://localhost:6969/register", {
+      email: email,
+      name: name,
+      password: password,
+    }).then((response) => {
+      // console.log(response);
+      if (response.data.message) {
+        setRegisterStatus(response.data.message);
+      } else {
+        setRegisterStatus("ACCOUNT CREATED SUCCESSFULLY");
+      }
+    });
   };
+
+  let imgs = [
+    "https://as2.ftcdn.net/v2/jpg/03/39/70/91/1000_F_339709132_H9HSSTtTmayePcbARkTSB2qoZTubJ6bR.jpg",
+  ];
   return (
     <div className="container" style={{ paddingTop: 60 }}>
       <div className="container-fluid h-custom">
         <div className="row d-flex justify-content-center align-items-center h-100">
-          <div className="col-md-9 col-lg-6 col-xl-5">
-            {<img src={loginimg} alt="" className="img-fluid" />}
-          </div>
           <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
             <form>
               <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                <p className="lead fw-normal mb-0 me-3">
-                  Login to your account
-                </p>
+                <p className="lead fw-normal mb-0 me-3">Create Your Account</p>
               </div>
-              <h1
-                style={{
-                  color: "red",
-                  fontSize: "15px",
-                  textAlign: "center",
-                  marginTop: "20px",
-                }}
-              >
-                {error && error}
-                {/* {error && <p style={{ color: "red" }}>{error}</p>} */}
-              </h1>
+              <p>
+                <h1
+                  style={{
+                    fontSize: "15px",
+                    textAlign: "center",
+                    marginTop: "20px",
+                  }}
+                >
+                  {registerStatus}
+                </h1>
+              </p>
+              {error && <p style={{ color: "red" }}>{error}</p>}
+              <div className="form-outline mb-4">
+                <input
+                  type="text"
+                  className="form-control form-control-lg"
+                  placeholder="Enter Name"
+                  required
+                  onChange={(e) => {
+                    setName(e.target.value);
+                    setError("");
+                  }}
+                  // placeholder="Enter your Name"
+                  // required
+                />
+                <label className="form-label">Name</label>
+              </div>
               <div className="form-outline mb-4">
                 <input
                   type="email"
                   className="form-control form-control-lg"
-                  placeholder="Enter a valid email address"
                   onChange={(e) => {
                     setEmail(e.target.value);
+                    setError("");
                   }}
+                  placeholder="Enter your Email Address"
                   required
                 />
                 <label className="form-label">Email address</label>
@@ -82,10 +93,11 @@ function Login() {
                 <input
                   type="password"
                   className="form-control form-control-lg"
-                  placeholder="Enter password"
                   onChange={(e) => {
                     setPassword(e.target.value);
+                    setError("");
                   }}
+                  placeholder="Enter your Password"
                   required
                 />
                 <label className="form-label">Password</label>
@@ -100,7 +112,7 @@ function Login() {
                   />
                   <label className="form-check-label">Remember me</label>
                 </div>
-                <a href="/#" className="text-body">
+                <a href="#" className="text-body">
                   Forgot password?
                 </a>
               </div>
@@ -109,18 +121,21 @@ function Login() {
                 <button
                   type="button"
                   className="btn btn-primary btn-lg"
-                  onClick={login}
+                  onClick={register}
                 >
-                  Login
+                  Sign Up
                 </button>
                 <p className="small fw-bold mt-2 pt-1 mb-0">
                   Login to your account{" "}
-                  <a href="signup" className="link-danger">
-                    Sign Up
+                  <a href="login" className="link-danger">
+                    Login
                   </a>
                 </p>
               </div>
             </form>
+          </div>
+          <div className="col-md-9 col-lg-6 col-xl-5">
+            <img src={imgs[0]} className="img-fluid" alt="" />
           </div>
         </div>
       </div>
@@ -128,4 +143,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Signup;
