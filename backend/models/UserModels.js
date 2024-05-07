@@ -1,5 +1,3 @@
-// userModel.js
-
 const con = require("../connect");
 
 function getUserByEmail(email, callback) {

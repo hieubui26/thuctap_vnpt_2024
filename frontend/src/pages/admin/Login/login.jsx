@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import loginimg from "./login.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { setToken } from "./Auth.jsx";
+import { setToken } from "../../../components/Auth.jsx";
 
 function Login() {
   const [email, setEmail] = useState("");

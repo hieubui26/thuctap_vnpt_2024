@@ -36,12 +36,10 @@ function Dashboard() {
               </li>
               <li>
                 <Link
-                  to="/employee"
+                  to="/admin/users"
                   className="nav-link px-0 align-middle text-white"
                 >
-                  <span className="ms-1 d-none d-sm-inline">
-                    Manage Employees
-                  </span>
+                  <span className="ms-1 d-none d-sm-inline">Manage Users</span>
                 </Link>
               </li>
               <li>
